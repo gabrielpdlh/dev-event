@@ -43,14 +43,11 @@ export async function GET(
       { status: 200 },
     );
   } catch (error) {
-    // Log error for debugging (only in development)
     if (process.env.NODE_ENV === "development") {
       console.error("Error fetching events by slug:", error);
     }
 
-    // Handle specific error types
     if (error instanceof Error) {
-      // Handle database connection errors
       if (error.message.includes("MONGODB_URI")) {
         return NextResponse.json(
           { message: "Database configuration error" },
